@@ -1,9 +1,9 @@
 //
 //  AppDelegate.swift
-//  Metrics
+//  metrics
 //
-//  Created by Martin Madsen on 1/20/17.
-//  Copyright © 2017 Martin Madsen. All rights reserved.
+//  Created by Keren Weinstein on 1/11/17.
+//  Copyright © 2017 Merlin Industries. All rights reserved.
 //
 
 import UIKit
