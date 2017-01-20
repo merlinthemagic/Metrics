@@ -6,7 +6,6 @@ extension MTO.Model.Network {
     
     public class HTTPData {
         
-        
         private var _dbConn = 0;
         
         

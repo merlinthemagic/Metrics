@@ -5,7 +5,6 @@ extension MTO.Model.Database {
     
     public class SQLite {
         
-        
         private var _dbConn = 0;
         
         //import SQLite

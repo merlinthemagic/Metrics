@@ -1,7 +1,6 @@
 //  Created by Martin Madsen on 1/19/17.
 //  Copyright © 2017 Merlin Industries. All rights reserved.
 
-
 import CoreLocation
 
 extension MTO.Model.Identification {
