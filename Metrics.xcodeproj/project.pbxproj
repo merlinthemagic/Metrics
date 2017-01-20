@@ -20,6 +20,8 @@
 		5B7C114E1E32811F004A6A88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B7C114D1E32811F004A6A88 /* Assets.xcassets */; };
 		5B7C114F1E32818F004A6A88 /* VcPrimary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7C11441E327EAC004A6A88 /* VcPrimary.swift */; };
 		5B7C11501E328190004A6A88 /* VcPrimary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7C11441E327EAC004A6A88 /* VcPrimary.swift */; };
+		5B7C11541E32829A004A6A88 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B7C11521E328299004A6A88 /* LaunchScreen.storyboard */; };
+		5B7C11561E3282A6004A6A88 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B7C11551E3282A6004A6A88 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +58,8 @@
 		5B7C11431E327EAC004A6A88 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5B7C11441E327EAC004A6A88 /* VcPrimary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VcPrimary.swift; sourceTree = "<group>"; };
 		5B7C114D1E32811F004A6A88 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5B7C11531E32829A004A6A88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		5B7C11551E3282A6004A6A88 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,7 +112,9 @@
 			children = (
 				5B72ACE31E327DB200EF2783 /* MTO */,
 				5B7C11421E327EAC004A6A88 /* AppDelegate.swift */,
+				5B7C11551E3282A6004A6A88 /* Main.storyboard */,
 				5B7C11441E327EAC004A6A88 /* VcPrimary.swift */,
+				5B7C11511E328288004A6A88 /* Base.lproj */,
 				5B7C114D1E32811F004A6A88 /* Assets.xcassets */,
 				5B7C11431E327EAC004A6A88 /* Info.plist */,
 			);
@@ -143,6 +149,14 @@
 				5B7C113C1E327E97004A6A88 /* SQLite.swift */,
 			);
 			name = MTO;
+			sourceTree = "<group>";
+		};
+		5B7C11511E328288004A6A88 /* Base.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				5B7C11521E328299004A6A88 /* LaunchScreen.storyboard */,
+			);
+			path = Base.lproj;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -256,8 +270,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B7C11541E32829A004A6A88 /* LaunchScreen.storyboard in Resources */,
 				5B7C114E1E32811F004A6A88 /* Assets.xcassets in Resources */,
 				5B7C11461E327EAC004A6A88 /* Info.plist in Resources */,
+				5B7C11561E3282A6004A6A88 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,6 +340,17 @@
 			targetProxy = 5B72ACBA1E327B7B00EF2783 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		5B7C11521E328299004A6A88 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5B7C11531E32829A004A6A88 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		5B72ACC01E327B7B00EF2783 /* Debug */ = {
