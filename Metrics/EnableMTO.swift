@@ -7,6 +7,7 @@ enum MTOException : Error {
     case InMethod(AnyObject, String, String, Int)
 }
 
+
 //How to use:
 //do {
 //    try self.locObj.stop();
