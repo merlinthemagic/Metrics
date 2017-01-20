@@ -12,7 +12,6 @@ class VcPrimary: UIViewController {
     @IBOutlet weak var recordMe: UIButton!
     @IBOutlet weak var recordDuration: UILabel!
 
-
     var recActive: Bool!;
     var locObj: MTO.Model.Identification.Location!;
     var recordQueue: DispatchQueue!;
