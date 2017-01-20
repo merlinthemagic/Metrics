@@ -18,6 +18,8 @@
 		5B7C11461E327EAC004A6A88 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B7C11431E327EAC004A6A88 /* Info.plist */; };
 		5B7C11471E327EAC004A6A88 /* VcPrimary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7C11441E327EAC004A6A88 /* VcPrimary.swift */; };
 		5B7C114E1E32811F004A6A88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B7C114D1E32811F004A6A88 /* Assets.xcassets */; };
+		5B7C114F1E32818F004A6A88 /* VcPrimary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7C11441E327EAC004A6A88 /* VcPrimary.swift */; };
+		5B7C11501E328190004A6A88 /* VcPrimary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7C11441E327EAC004A6A88 /* VcPrimary.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -295,6 +297,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B72ACB31E327B7A00EF2783 /* MetricsTests.swift in Sources */,
+				5B7C114F1E32818F004A6A88 /* VcPrimary.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,6 +306,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B72ACBE1E327B7B00EF2783 /* MetricsUITests.swift in Sources */,
+				5B7C11501E328190004A6A88 /* VcPrimary.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
