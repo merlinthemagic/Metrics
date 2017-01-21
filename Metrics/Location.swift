@@ -12,7 +12,8 @@ extension MTO.Model.Identification {
         private var _locManager: CLLocationManager!;
         private var _locPermission  = "always";
         private var _locAccuracy    = "best";
-        private var _locBackground  = true;
+        private var _locBackground  = false;
+        private var _locPause       = true;
         
         
         public func isInit() -> Bool {
@@ -54,6 +55,16 @@ extension MTO.Model.Identification {
             self._locBackground = allowed;
             if (self.isInit() == true) {
                 self.getManager().allowsBackgroundLocationUpdates = self.getBackgroundAllowed();
+            }
+        }
+        public func getPauseAllowed() -> Bool {
+            return self._locPause;
+        }
+        public func setPauseAllowed(_ allowed: Bool) -> Void {
+            
+            self._locPause = allowed;
+            if (self.isInit() == true) {
+                self.getManager().pausesLocationUpdatesAutomatically = self.getPauseAllowed();
             }
         }
         public func getDelegate() -> CLLocationManagerDelegate {
@@ -113,8 +124,8 @@ extension MTO.Model.Identification {
                 }
                 
                 self._locManager.desiredAccuracy = self.getAccuracy();
-                self._locManager.allowsBackgroundLocationUpdates = self.getBackgroundAllowed();
-                
+                self._locManager.allowsBackgroundLocationUpdates        = self.getBackgroundAllowed();
+                self._locManager.pausesLocationUpdatesAutomatically     = self.getPauseAllowed();
             }
             
             return self._locManager;

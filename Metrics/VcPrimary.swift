@@ -14,7 +14,6 @@ class VcPrimary: UIViewController {
     @IBOutlet weak var recordDuration: UILabel!
     @IBOutlet weak var lastPost: UILabel!
     
-    var lastPostEpoch   = 0;
     var recEpoch        = 0;
     var recActive       = false;
     
@@ -38,6 +37,8 @@ class VcPrimary: UIViewController {
         self.recActive   = false;
         self.locObj      = MTO.Model.Identification.Location();
         self.locObj.setDelegate(self);
+        self.locObj.setBackgroundAllowed(true);
+        self.locObj.setPauseAllowed(false);
     }
 
     @IBAction func toggleRecord(_ sender: UIButton) {
@@ -89,21 +90,19 @@ class VcPrimary: UIViewController {
             }
 
             MTO.Model.Network.HTTPData().postJson(url, postData);
-            self.lastPostEpoch  = curDuration;
             
             print("posted");
             //clear the array and start over
             self.locations.removeAll();
         }
         
-        
-       
         if (UIApplication.shared.applicationState == .active) {
             self.recordDuration.text    = String(curDuration);
-            self.lastPost.text          = String(self.lastPostEpoch);
             print("App is on Screen: \(curDuration)")
+        } else if (UIApplication.shared.applicationState == .background) {
+            print("App is in the background: \(curDuration)")
         } else {
-            print("App is off Screen: \(curDuration)")
+            print("App is in unknown mode: \(curDuration)")
         }
     }
 }
