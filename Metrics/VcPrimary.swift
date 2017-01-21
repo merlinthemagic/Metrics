@@ -6,19 +6,29 @@
 //  Copyright © 2017 Merlin Industries. All rights reserved.
 //
 import UIKit
+import CoreLocation
 
 class VcPrimary: UIViewController {
 
     @IBOutlet weak var recordMe: UIButton!
     @IBOutlet weak var recordDuration: UILabel!
 
-    var recActive: Bool!;
+    var recEpoch    = 0;
+    var recActive   = false;
+    var lastLocation: CLLocation!;
+    
+    var locations = [CLLocation]();
+    let postInterval    = 10;
+    
     var locObj: MTO.Model.Identification.Location!;
-    var recordQueue: DispatchQueue!;
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initApp();
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
 
     func initApp()
@@ -26,7 +36,7 @@ class VcPrimary: UIViewController {
         self.recordMe.setTitle("Start Recording", for: UIControlState.normal);
         self.recActive   = false;
         self.locObj      = MTO.Model.Identification.Location();
-        self.recordQueue = DispatchQueue(label: "recordLoop");
+        self.locObj.setDelegate(self);
     }
 
     @IBAction func toggleRecord(_ sender: UIButton) {
@@ -36,14 +46,14 @@ class VcPrimary: UIViewController {
             self.recActive  = true;
             self.recordMe.setTitle("Stop Recording", for: UIControlState.normal);
             
-            self.recordQueue.async() {
-                //start recording in the background
-                 self.recordLoop();
-            }
+            self.recEpoch    = Int(Date().timeIntervalSince1970);
+            self.locObj.start();
             
             print("Starting Recorder");
 
         } else {
+            
+            self.locObj.stop();
             
             self.recActive  = false;
             self.recordMe.setTitle("Start Recording", for: UIControlState.normal);
@@ -52,59 +62,63 @@ class VcPrimary: UIViewController {
         }
     }
     
-    func recordLoop() {
-
-        //triggered as a backgroud thread only...
-        print("Loop Recording");
+    func processData() {
         
-        self.locObj.start();
-        
-        //                var rData           = [String : Double]()
-        //                rData["lat"]        = locObj!.coordinate.latitude;
-        //                rData["long"]       = locObj!.coordinate.longitude;
-        //                rData["alt"]        = locObj!.altitude;
-        //                rData["speed"]      = locObj!.speed;
-        //                rData["course"]     = locObj!.course;
-        //                rData["accH"]       = locObj!.horizontalAccuracy;
-        //                rData["accV"]       = locObj!.verticalAccuracy;
-        
-        let sTime   = NSDate().timeIntervalSince1970;
-        var cTime   = NSDate().timeIntervalSince1970;
-        var cLoc    = self.locObj.getCurrent();
-        var cDur    = 0;
-        
-        var i=0;
-        while (self.recActive == true) {
-            i += 1;
-            cLoc    = self.locObj.getCurrent();
-            usleep(500000);
+        let dpCount         = self.locations.count;
+        if (dpCount >= self.postInterval) {
+            //we need to send the data to the API
+            //let locObj    = self.lastLocation;
+            let url       = "http://betcollect.martinpetermadsen.com/Merlin/Thoughts/Main/LocationData";
             
-            cTime   = NSDate().timeIntervalSince1970;
-            cDur    = Int(cTime - sTime);
+            var postData = [[String:Any]]();
+//            var postData: Array<[String:Any]>();
             
-            DispatchQueue.main.async() {
-                //update the main thread async
-                 self.recordDuration.text    = String(cDur);
+            for aLocObj in self.locations {
+                
+                let jsonStr: [String: Any] = [
+                    "location": [
+                        "accuracy": ["horizontal": aLocObj.horizontalAccuracy, "vertical": aLocObj.verticalAccuracy],
+                        "coordinates": ["lat": aLocObj.coordinate.latitude, "long": aLocObj.coordinate.longitude],
+                        "altitude": aLocObj.altitude,
+                        "speed": aLocObj.speed,
+                        "course": aLocObj.course
+                    ]
+                ];
+                
+                postData.append(jsonStr);
             }
-            print(cLoc);
-            print("Loop Id \(i), Running");
+            
+            print("posting");
+            MTO.Model.Network.HTTPData().postJson(url, postData);
+            
+            //clear the array and start over
+            self.locations.removeAll();
         }
         
-        DispatchQueue.main.async() {
-            self.recordDuration.text    = "Done: \(String(cDur))";
+        
+        let curDuration     = Int(Date().timeIntervalSince1970) - self.recEpoch;
+        if (UIApplication.shared.applicationState == .active) {
+            self.recordDuration.text    = String(curDuration);
+            print("App is on Screen: \(curDuration)")
+        } else {
+            print("App is off Screen: \(curDuration)")
         }
-        
-        
-       self.locObj.stop();
-        
-        print("Loop Exit");
     }
+}
+
+
+extension VcPrimary: CLLocationManagerDelegate {
     
-    
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        let lLoc = locations.last
+        if (lLoc != nil) {
+            //we have a location
+            self.locations.append(lLoc!);
+            self.processData();
+        } else {
+            //no location provided nothing to do
+        }
     }
 }
 

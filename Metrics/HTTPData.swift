@@ -6,31 +6,41 @@ extension MTO.Model.Network {
     
     public class HTTPData {
         
-        private var _dbConn = 0;
-        
-        
-        public func postData(_ url: URL, _ dataArray: Array<Any>)
+        public func postJson(_ url: String, _ postData: Any)
         {
             
-            //            var request = URLRequest(url: URL(string: "http://www.thisismylink.com/postName.php")!)
-            //            request.httpMethod = "POST"
-            //            let postString = "id=13&name=Jack"
-            //            request.httpBody = postString.data(using: .utf8)
-            //            let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            //                guard let data = data, error == nil else {                                                 // check for fundamental networking error
-            //                    print("error=\(error)")
-            //                    return
-            //                }
-            //
-            //                if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
-            //                    print("statusCode should be 200, but is \(httpStatus.statusCode)")
-            //                    print("response = \(response)")
-            //                }
-            //
-            //                let responseString = String(data: data, encoding: .utf8)
-            //                print("responseString = \(responseString)")
-            //            }
+            //json data like this:
+            //let postData: [String: Any] = ["title": "ABC", "dict": ["1":"First", "2":"Second"]];
+            // or like this (for loop):
+            //var postData = [[String:Any]]();
+            //then loop over your array and append to postData
             
+            //in PHP you would have to pick up the data like this:
+            //json_decode($GLOBALS["HTTP_RAW_POST_DATA"], true); // array of the posted data
+
+            let jsonData = try? JSONSerialization.data(withJSONObject: postData, options: .prettyPrinted);
+
+            // create post request
+            let url = URL(string: url)!
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+            
+            // insert json data to the request
+            request.httpBody = jsonData
+            
+            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                guard let data = data, error == nil else {
+                    print(error?.localizedDescription ?? "No data")
+                    return
+                }
+                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+                if let responseJSON = responseJSON as? [String: Any] {
+                    print(responseJSON)
+                }
+            }
+            
+            task.resume()
         }
     }
 }

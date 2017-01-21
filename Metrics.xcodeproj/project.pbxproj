@@ -12,10 +12,8 @@
 		5B7C113D1E327E97004A6A88 /* EnableMTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7C11381E327E97004A6A88 /* EnableMTO.swift */; };
 		5B7C113E1E327E97004A6A88 /* HTTPData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7C11391E327E97004A6A88 /* HTTPData.swift */; };
 		5B7C113F1E327E97004A6A88 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7C113A1E327E97004A6A88 /* Location.swift */; };
-		5B7C11401E327E97004A6A88 /* NS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7C113B1E327E97004A6A88 /* NS.swift */; };
 		5B7C11411E327E97004A6A88 /* SQLite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7C113C1E327E97004A6A88 /* SQLite.swift */; };
 		5B7C11451E327EAC004A6A88 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7C11421E327EAC004A6A88 /* AppDelegate.swift */; };
-		5B7C11461E327EAC004A6A88 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B7C11431E327EAC004A6A88 /* Info.plist */; };
 		5B7C11471E327EAC004A6A88 /* VcPrimary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7C11441E327EAC004A6A88 /* VcPrimary.swift */; };
 		5B7C114E1E32811F004A6A88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B7C114D1E32811F004A6A88 /* Assets.xcassets */; };
 		5B7C114F1E32818F004A6A88 /* VcPrimary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7C11441E327EAC004A6A88 /* VcPrimary.swift */; };
@@ -52,7 +50,6 @@
 		5B7C11381E327E97004A6A88 /* EnableMTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnableMTO.swift; sourceTree = "<group>"; };
 		5B7C11391E327E97004A6A88 /* HTTPData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPData.swift; sourceTree = "<group>"; };
 		5B7C113A1E327E97004A6A88 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
-		5B7C113B1E327E97004A6A88 /* NS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NS.swift; sourceTree = "<group>"; };
 		5B7C113C1E327E97004A6A88 /* SQLite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLite.swift; sourceTree = "<group>"; };
 		5B7C11421E327EAC004A6A88 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5B7C11431E327EAC004A6A88 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -145,7 +142,6 @@
 				5B7C11381E327E97004A6A88 /* EnableMTO.swift */,
 				5B7C11391E327E97004A6A88 /* HTTPData.swift */,
 				5B7C113A1E327E97004A6A88 /* Location.swift */,
-				5B7C113B1E327E97004A6A88 /* NS.swift */,
 				5B7C113C1E327E97004A6A88 /* SQLite.swift */,
 			);
 			name = MTO;
@@ -272,7 +268,6 @@
 			files = (
 				5B7C11541E32829A004A6A88 /* LaunchScreen.storyboard in Resources */,
 				5B7C114E1E32811F004A6A88 /* Assets.xcassets in Resources */,
-				5B7C11461E327EAC004A6A88 /* Info.plist in Resources */,
 				5B7C11561E3282A6004A6A88 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -299,7 +294,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B7C11451E327EAC004A6A88 /* AppDelegate.swift in Sources */,
-				5B7C11401E327E97004A6A88 /* NS.swift in Sources */,
 				5B7C11411E327E97004A6A88 /* SQLite.swift in Sources */,
 				5B7C11471E327EAC004A6A88 /* VcPrimary.swift in Sources */,
 				5B7C113D1E327E97004A6A88 /* EnableMTO.swift in Sources */,

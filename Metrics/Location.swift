@@ -2,14 +2,18 @@
 //  Copyright © 2017 Merlin Industries. All rights reserved.
 
 import CoreLocation
+import UIKit
 
 extension MTO.Model.Identification {
     
     public class Location {
         
+        private var _locDelegate:CLLocationManagerDelegate!;
         private var _locManager: CLLocationManager!;
         private var _locPermission  = "always";
         private var _locAccuracy    = "best";
+        private var _locBackground  = true;
+        
         
         public func isInit() -> Bool {
             if (self._locManager == nil) {
@@ -40,6 +44,25 @@ extension MTO.Model.Identification {
                  self._locPermission  = typeName;
             } else {
                 throw MTOException.InMethod(self, #function, "Invalid Type: \(typeName)", 0);
+            }
+        }
+        public func getBackgroundAllowed() -> Bool {
+            return self._locBackground;
+        }
+        public func setBackgroundAllowed(_ allowed: Bool) -> Void {
+            
+            self._locBackground = allowed;
+            if (self.isInit() == true) {
+                self.getManager().allowsBackgroundLocationUpdates = self.getBackgroundAllowed();
+            }
+        }
+        public func getDelegate() -> CLLocationManagerDelegate {
+            return self._locDelegate!;
+        }
+        public func setDelegate(_ delegateObj: CLLocationManagerDelegate) -> Void {
+            self._locDelegate  = delegateObj;
+            if (self.isInit() == true) {
+                self.getManager().delegate = self.getDelegate();
             }
         }
         public func getAccuracy() -> Double {
@@ -84,7 +107,14 @@ extension MTO.Model.Identification {
                 } else {
                     self._locManager.requestWhenInUseAuthorization();
                 }
+                
+                if (self._locDelegate != nil) {
+                    self.getManager().delegate = self.getDelegate();
+                }
+                
                 self._locManager.desiredAccuracy = self.getAccuracy();
+                self._locManager.allowsBackgroundLocationUpdates = self.getBackgroundAllowed();
+                
             }
             
             return self._locManager;
