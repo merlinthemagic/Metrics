@@ -34,9 +34,17 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last Post" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hcc-YF-rZs">
+                                <rect key="frame" x="111.5" y="405" width="151" height="45"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="37"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="hcc-YF-rZs" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="94" id="68j-J9-j7B"/>
+                            <constraint firstItem="hcc-YF-rZs" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="EsH-XR-thw"/>
                             <constraint firstItem="qVg-bY-yzW" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-269.5" id="KPD-LV-nQ4"/>
                             <constraint firstItem="huD-k6-vFf" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Mvm-Dy-R5S"/>
                             <constraint firstItem="huD-k6-vFf" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="183" id="icr-YP-3oz"/>
@@ -44,6 +52,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="lastPost" destination="hcc-YF-rZs" id="cR6-Mg-g8d"/>
                         <outlet property="recordDuration" destination="huD-k6-vFf" id="KXJ-L2-U98"/>
                         <outlet property="recordMe" destination="qVg-bY-yzW" id="cpi-wi-bdG"/>
                     </connections>

@@ -12,12 +12,13 @@ class VcPrimary: UIViewController {
 
     @IBOutlet weak var recordMe: UIButton!
     @IBOutlet weak var recordDuration: UILabel!
-
-    var recEpoch    = 0;
-    var recActive   = false;
-    var lastLocation: CLLocation!;
+    @IBOutlet weak var lastPost: UILabel!
     
-    var locations = [CLLocation]();
+    var lastPostEpoch   = 0;
+    var recEpoch        = 0;
+    var recActive       = false;
+    
+    var locations       = [CLLocation]();
     let postInterval    = 10;
     
     var locObj: MTO.Model.Identification.Location!;
@@ -64,15 +65,14 @@ class VcPrimary: UIViewController {
     
     func processData() {
         
-        let dpCount         = self.locations.count;
+        let curDuration    = Int(Date().timeIntervalSince1970) - self.recEpoch;
+        let dpCount        = self.locations.count;
+        
         if (dpCount >= self.postInterval) {
-            //we need to send the data to the API
-            //let locObj    = self.lastLocation;
+            //send the data to the API
             let url       = "http://betcollect.martinpetermadsen.com/Merlin/Thoughts/Main/LocationData";
             
             var postData = [[String:Any]]();
-//            var postData: Array<[String:Any]>();
-            
             for aLocObj in self.locations {
                 
                 let jsonStr: [String: Any] = [
@@ -87,18 +87,20 @@ class VcPrimary: UIViewController {
                 
                 postData.append(jsonStr);
             }
-            
-            print("posting");
+
             MTO.Model.Network.HTTPData().postJson(url, postData);
+            self.lastPostEpoch  = curDuration;
             
+            print("posted");
             //clear the array and start over
             self.locations.removeAll();
         }
         
         
-        let curDuration     = Int(Date().timeIntervalSince1970) - self.recEpoch;
+       
         if (UIApplication.shared.applicationState == .active) {
             self.recordDuration.text    = String(curDuration);
+            self.lastPost.text          = String(self.lastPostEpoch);
             print("App is on Screen: \(curDuration)")
         } else {
             print("App is off Screen: \(curDuration)")
